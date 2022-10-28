@@ -1,8 +1,8 @@
 // Update with your config settings.
 import { resolve } from 'path';
 import * as Constants from '../../Commons/Constants/common';
-const migrationPath = resolve('../../../migrations');
-const seederPath = resolve('../../../seeders');
+const migrationPath = resolve(__dirname + '../../../../migrations');
+const seederPath = resolve(__dirname + '../../../../seeders');
 
 const commonSettings = {
   client: 'mysql2',
