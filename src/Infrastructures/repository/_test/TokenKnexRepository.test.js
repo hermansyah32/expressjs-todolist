@@ -55,7 +55,7 @@ describe('TokenKnexRepository', () => {
   describe('getBy function', () => {
     it('should running correctly', async () => {
       // Arrange
-      const tokenSchema = new GeneratedToken({ token: 'token' });
+      const tokenSchema = new GeneratedToken({ token: 'token2' });
       const knexConfig = knex(testing);
       const tokenRepository = new TokenKnexRepository(knexConfig);
       await tokenRepository.store(tokenSchema);
