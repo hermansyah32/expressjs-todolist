@@ -85,7 +85,7 @@ describe('JwtTokenManager', () => {
     });
   });
 
-  describe.skip('decodePayload function', () => {
+  describe('decodePayload function', () => {
     it('should decode payload correctly', async () => {
       // Arrange
       const jwtTokenManager = new JwtTokenManager(jwt);
