@@ -1,10 +1,5 @@
 import knex from 'knex';
-import InvariantError from '../../../Commons/exceptions/InvariantError';
-import GeneratedToken from '../../../Domains/authentications/schemas/GeneratedToken';
 import { testing } from '../../database/knexfile';
-import { testing as testingEnv } from '../../../../tests/knexfileTestHelper';
-import DatabaseError from '../../../Commons/exceptions/DatabaseError';
-import NotFoundError from '../../../Commons/exceptions/NotFoundError';
 import UserKnexRepository from '../UserKnexRepository';
 import UserRepository from '../../../Domains/users/UserRepository';
 import IndexSchema from '../../../Domains/IndexSchema';
