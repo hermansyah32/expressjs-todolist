@@ -1,23 +1,23 @@
-import RegisterUser from './schemas/RegisterUser';
-import RegisteredUser from './schemas/RegisteredUser';
+import CreateTodo from './schemas/CreateTodo';
+import CreatedTodo from './schemas/CreatedTodo';
 
-export default class UserRepository {
-  static tableName = 'users';
+export default class TodoRepository {
+  static tableName = 'todos';
 
   async index(payload) {
-    throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    throw new Error('TODO_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
   async indexTrashed(payload) {
-    throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    throw new Error('TODO_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
   /**
    * Create new resources
-   * @param {RegisterUser} payload
+   * @param {CreateTodo} payload
    */
   async store(payload) {
-    throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    throw new Error('TODO_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
   /**
@@ -26,7 +26,7 @@ export default class UserRepository {
    * @param {string} value
    */
   async getBy(column, value) {
-    throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    throw new Error('TODO_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
   /**
@@ -35,17 +35,17 @@ export default class UserRepository {
    * @param {string} value
    */
   async getTrashedBy(column, value) {
-    throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    throw new Error('TODO_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
   /**
    * Update resources by column and value
    * @param {string} column
    * @param {string} value
-   * @param {RegisteredUser} payload
+   * @param {CreatedTodo} payload
    */
   async updateBy(column, value, payload) {
-    throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    throw new Error('TODO_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
   /**
@@ -54,7 +54,7 @@ export default class UserRepository {
    * @param {string} value
    */
   async restoreBy(column, value) {
-    throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    throw new Error('TODO_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
   /**
@@ -63,7 +63,7 @@ export default class UserRepository {
    * @param {string} value
    */
   async destroyBy(column, value) {
-    throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    throw new Error('TODO_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
   /**
@@ -72,6 +72,6 @@ export default class UserRepository {
    * @param {string} value
    */
   async permanentDestroyBy(column, value) {
-    throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    throw new Error('TODO_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 }
