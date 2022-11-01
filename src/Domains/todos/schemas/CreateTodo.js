@@ -18,6 +18,7 @@ export default class CreateTodo {
     this.todo = todo;
     this.description = description;
     this.author_id = author_id;
+    this.deleted_at = null;
     this.created_at = created_at || dayjs().format('YYYY-MM-DD HH:mm:ss');
     this.updated_at = updated_at || dayjs().format('YYYY-MM-DD HH:mm:ss');
   }
