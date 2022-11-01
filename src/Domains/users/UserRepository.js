@@ -39,6 +39,15 @@ export default class UserRepository {
   }
 
   /**
+   * Find password by column and value
+   * @param {string} column
+   * @param {string} value
+   */
+   async getPasswordBy(column, value) {
+    throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+  }
+
+  /**
    * Find trashed resources by column and value
    * @param {string} column
    * @param {string} value

@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import bcrypt from 'bcrypt';
 import BcryptPasswordHash from '../security/BcryptPasswordHash';
 import DatabaseError from '../../Commons/exceptions/DatabaseError';
+import PasswordUser from '../../Domains/users/schemas/PasswordUser';
 
 export default class UserKnexRepository extends UserRepository {
   /**
@@ -105,6 +106,31 @@ export default class UserKnexRepository extends UserRepository {
       if (result.length < 1) throw new NotFoundError('User data not found');
 
       return new RegisteredUser(result[0]);
+    } catch (error) {
+      if (error instanceof NotFoundError === false) {
+        throw new DatabaseError(error.message, {
+          sqlState: error.sqlState,
+          sqlMessage: error.sqlMessage,
+          sql: error.sql,
+        });
+      }
+      throw error;
+    }
+  }
+
+  /**
+   * Find password by column and value
+   * @param {string} column
+   * @param {string} value
+   */
+   async getPasswordBy(column, value) {
+    try {
+      const result = await this._knex(UserRepository.tableName)
+        .where(column, value)
+        .whereNull('deleted_at');
+      if (result.length < 1) throw new NotFoundError('User data not found');
+
+      return new PasswordUser(result[0]);
     } catch (error) {
       if (error instanceof NotFoundError === false) {
         throw new DatabaseError(error.message, {
