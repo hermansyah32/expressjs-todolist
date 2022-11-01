@@ -82,6 +82,7 @@ export default class UserKnexRepository extends UserRepository {
       payload.password = await passwordHash.hash(payload.password);
 
       await this._knex(UserRepository.tableName).insert(payload);
+      return payload;
     } catch (error) {
       throw new DatabaseError(error.message, {
         sqlState: error.sqlState,
@@ -154,7 +155,7 @@ export default class UserKnexRepository extends UserRepository {
         .whereNull('deleted_at');
       if (registeredUser.length < 1)
         throw new NotFoundError('User data not found');
-      const updateUser = new RegisteredUser(registeredUser[0]);
+      const updateUser = new RegisteredUser(registeredUser[0], true);
       Object.assign(updateUser, payload);
 
       await this._knex(UserRepository.tableName)
@@ -181,16 +182,18 @@ export default class UserKnexRepository extends UserRepository {
    */
   async restoreBy(column, value) {
     try {
-      const registeredUser = await this._knex(UserRepository.tableName).where(
+      const userResult = await this._knex(UserRepository.tableName).where(
         column,
         value
       );
-      if (registeredUser.length < 1)
-        throw new NotFoundError('User data not found');
+      if (userResult.length < 1) throw new NotFoundError('User data not found');
+      const registeredUser = new RegisteredUser(userResult[0], true);
+      registeredUser.deleted_at = null;
 
       await this._knex(UserRepository.tableName)
         .where(column, value)
-        .update({ deleted_at: null });
+        .update({ deleted_at: registeredUser.deleted_at });
+      return registeredUser;
     } catch (error) {
       if (error instanceof NotFoundError === false) {
         throw new DatabaseError(error.message, {

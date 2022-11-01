@@ -73,17 +73,13 @@ describe('UserKnexRepository', () => {
       const userRepository = new UserKnexRepository(knexConfig);
 
       // Action
-      await userRepository.store(registerUser);
+      const result = await userRepository.store(registerUser);
 
       // Assert
-      const result = await knexConfig(UserRepository.tableName).where(
-        'email',
-        registerUser.email
-      );
-      expect(result[0].id).toEqual(registerUser.id);
-      expect(result[0].username).toEqual(registerUser.username);
-      expect(result[0].email).toEqual(registerUser.email);
-      expect(result[0].fullname).toEqual(registerUser.fullname);
+      expect(result.id).toEqual(registerUser.id);
+      expect(result.username).toEqual(registerUser.username);
+      expect(result.email).toEqual(registerUser.email);
+      expect(result.fullname).toEqual(registerUser.fullname);
     });
   });
 
@@ -104,8 +100,7 @@ describe('UserKnexRepository', () => {
       const result = await userRepository.getBy('email', registerUser.email);
 
       // Assert
-      expect(result.id).not.toBeUndefined();
-      expect(result.id).not.toBeNull();
+      expect(result.id).toBeTruthy();
       expect(result.username).toEqual(registerUser.username);
       expect(result.email).toEqual(registerUser.email);
       expect(result.fullname).toEqual(registerUser.fullname);
@@ -136,8 +131,7 @@ describe('UserKnexRepository', () => {
       );
 
       // Assert
-      expect(result.id).not.toBeUndefined();
-      expect(result.id).not.toBeNull();
+      expect(result.id).toBeTruthy();
       expect(result.username).toEqual(registerUser.username);
       expect(result.email).toEqual(registerUser.email);
       expect(result.fullname).toEqual(registerUser.fullname);
@@ -166,8 +160,7 @@ describe('UserKnexRepository', () => {
       );
 
       // Assert
-      expect(result.id).not.toBeUndefined();
-      expect(result.id).not.toBeNull();
+      expect(result.id).toBeTruthy();
       expect(result.username).toEqual(registerUser.username);
       expect(result.email).toEqual(registerUser.email);
       expect(result.fullname).toEqual(newFullname);
@@ -192,18 +185,13 @@ describe('UserKnexRepository', () => {
       );
 
       // Action
-      await userRepository.restoreBy('email', registerUser.email);
+      const result = await userRepository.restoreBy('email', registerUser.email);
 
       // Assert
-      const result = await knexConfig(UserRepository.tableName).where(
-        'email',
-        registerUser.email
-      );
-      expect(result[0].id).not.toBeUndefined();
-      expect(result[0].id).not.toBeNull();
-      expect(result[0].username).toEqual(registerUser.username);
-      expect(result[0].email).toEqual(registerUser.email);
-      expect(result[0].fullname).toEqual(registerUser.fullname);
+      expect(result.id).toBeTruthy();
+      expect(result.username).toEqual(registerUser.username);
+      expect(result.email).toEqual(registerUser.email);
+      expect(result.fullname).toEqual(registerUser.fullname);
     });
   });
 
@@ -227,8 +215,7 @@ describe('UserKnexRepository', () => {
       const result = await knexConfig(UserRepository.tableName)
         .where('email', registerUser.email)
         .whereNotNull('deleted_at');
-      expect(result[0].id).not.toBeUndefined();
-      expect(result[0].id).not.toBeNull();
+      expect(result[0].id).toBeTruthy();
       expect(result[0].username).toEqual(registerUser.username);
       expect(result[0].email).toEqual(registerUser.email);
       expect(result[0].fullname).toEqual(registerUser.fullname);
