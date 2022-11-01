@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import GeneratedToken from '../GeneratedToken';
 
 describe('GeneratedToken', () => {
@@ -10,11 +11,13 @@ describe('GeneratedToken', () => {
   it('should create object correctly', () => {
     const payload = {
       token: 'token',
+      expired_at: dayjs().format('YYYY-MM-DD HH:mm:ss'),
     };
     const generatedToken = new GeneratedToken(payload);
 
     expect(generatedToken.token).toEqual(payload.token);
-    expect(generatedToken.created_at).not.toBeUndefined();
-    expect(generatedToken.updated_at).not.toBeUndefined();
+    expect(generatedToken.expired_at).toBeTruthy();
+    expect(generatedToken.created_at).toBeTruthy();
+    expect(generatedToken.updated_at).toBeTruthy();
   });
 });

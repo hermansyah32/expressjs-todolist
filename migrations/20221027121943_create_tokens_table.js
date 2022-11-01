@@ -7,6 +7,7 @@ import TokenRepository from "../src/Domains/authentications/TokenRepository";
 export function up(knex) {
   return knex.schema.createTable(TokenRepository.tableName, function (table) {
     table.string('token').primary();
+    table.datetime('expired_at');
     table.timestamps();
   });
 }
