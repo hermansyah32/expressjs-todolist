@@ -77,6 +77,7 @@ export default class TodoKnexRepository extends TodoRepository {
 
     try {
       await this._knex(TodoRepository.tableName).insert(payload);
+      return payload;
     } catch (error) {
       throw new DatabaseError(error.message, {
         sqlState: error.sqlState,
@@ -149,7 +150,7 @@ export default class TodoKnexRepository extends TodoRepository {
         .whereNull('deleted_at');
       if (createdTodo.length < 1)
         throw new NotFoundError('Todo data not found');
-      const updatedTodo = new CreatedTodo(createdTodo[0]);
+      const updatedTodo = new CreatedTodo(createdTodo[0], true);
       Object.assign(updatedTodo, payload);
 
       await this._knex(TodoRepository.tableName)
@@ -176,16 +177,19 @@ export default class TodoKnexRepository extends TodoRepository {
    */
   async restoreBy(column, value) {
     try {
-      const createdTodo = await this._knex(TodoRepository.tableName).where(
+      const todoResult = await this._knex(TodoRepository.tableName).where(
         column,
         value
       );
-      if (createdTodo.length < 1)
-        throw new NotFoundError('Todo data not found');
+      if (todoResult.length < 1) throw new NotFoundError('Todo data not found');
+      const createdTodo = new CreatedTodo(todoResult[0], true);
+      createdTodo.deleted_at = null;
 
       await this._knex(TodoRepository.tableName)
         .where(column, value)
-        .update({ deleted_at: null });
+        .update({ deleted_at: createdTodo.deleted_at });
+
+      return createdTodo;
     } catch (error) {
       if (error instanceof NotFoundError === false) {
         throw new DatabaseError(error.message, {

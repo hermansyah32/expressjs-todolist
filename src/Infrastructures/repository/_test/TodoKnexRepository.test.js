@@ -67,16 +67,12 @@ describe('TodoKnexRepository', () => {
       const todoRepository = new TodoKnexRepository(knexConfig);
 
       // Action
-      await todoRepository.store(createTodo);
+      const result = await todoRepository.store(createTodo);
 
       // Assert
-      const result = await knexConfig(TodoRepository.tableName).where(
-        'id',
-        createTodo.id
-      );
-      expect(result[0].id).toEqual(createTodo.id);
-      expect(result[0].todo).toEqual(createTodo.todo);
-      expect(result[0].description).toEqual(createTodo.description);
+      expect(result.id).toEqual(createTodo.id);
+      expect(result.todo).toEqual(createTodo.todo);
+      expect(result.description).toEqual(createTodo.description);
     });
   });
 
@@ -171,17 +167,13 @@ describe('TodoKnexRepository', () => {
       );
 
       // Action
-      await todoRepository.restoreBy('id', createTodo.id);
+      const result = await todoRepository.restoreBy('id', createTodo.id);
 
       // Assert
-      const result = await knexConfig(TodoRepository.tableName).where(
-        'id',
-        createTodo.id
-      );
-      expect(result[0].id).toBeTruthy();
-      expect(result[0].todo).toEqual(createTodo.todo);
-      expect(result[0].description).toEqual(createTodo.description);
-      expect(result[0].deleted_at).toBeNull();
+      expect(result.id).toBeTruthy();
+      expect(result.todo).toEqual(createTodo.todo);
+      expect(result.description).toEqual(createTodo.description);
+      expect(result.deleted_at).toBeNull();
     });
   });
 

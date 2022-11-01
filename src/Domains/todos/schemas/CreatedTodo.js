@@ -9,7 +9,7 @@ export default class CreatedTodo {
    * Constructor class.
    * @param {{ id, todo, description, author_id }} payload
    */
-  constructor(payload) {
+  constructor(payload, isUpdate = false) {
     this._verifyInput(payload);
 
     const {
@@ -27,7 +27,7 @@ export default class CreatedTodo {
     this.author_id = author_id;
     this.deleted_at = deleted_at;
     this.created_at = created_at;
-    this.updated_at = updated_at || dayjs().format('YYYY-MM-DD HH:mm:ss');
+    this.updated_at = isUpdate ? dayjs().format('YYYY-MM-DD HH:mm:ss') : updated_at || dayjs().format('YYYY-MM-DD HH:mm:ss');
   }
 
   assign({ todo, description, author_id }) {
