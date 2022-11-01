@@ -19,6 +19,7 @@ export default class RegisterUser {
     this.email = email;
     this.fullname = fullname;
     this.password = password;
+    this.deleted_at = null;
     this.created_at = created_at || dayjs().format('YYYY-MM-DD HH:mm:ss');
     this.updated_at = updated_at || dayjs().format('YYYY-MM-DD HH:mm:ss');
   }
