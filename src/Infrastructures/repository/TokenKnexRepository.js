@@ -24,6 +24,7 @@ export default class TokenKnexRepository extends TokenRepository {
 
     try {
       await this._knex(TokenRepository.tableName).insert(payload);
+      return payload;
     } catch (error) {
       throw new DatabaseError(error.message, {
         sqlState: error.sqlState,
@@ -45,7 +46,7 @@ export default class TokenKnexRepository extends TokenRepository {
       );
       if (result.length === 0)
         throw new NotFoundError('Token credential is not found');
-      return result;
+      return result[0];
     } catch (error) {
       if (error instanceof NotFoundError === false) {
         throw new DatabaseError(error.message, {

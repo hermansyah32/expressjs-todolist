@@ -62,8 +62,7 @@ describe('TokenKnexRepository', () => {
       // Action
       const result = await tokenRepository.getBy(tokenSchema.token);
       // Assert
-      expect(result.length).toEqual(1);
-      expect(result[0].token).toEqual(tokenSchema.token);
+      expect(result.token).toEqual(tokenSchema.token);
     });
 
     it('should throw NotFoundError if not token found', async () => {
