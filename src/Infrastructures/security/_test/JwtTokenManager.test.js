@@ -38,7 +38,10 @@ describe('JwtTokenManager', () => {
       const payload = {
         username: 'hermansyah32',
       };
-      const signOptions = { expiresIn: REFRESH_TOKEN_EXPIRE };
+      const signOptions = {
+        expiresIn: REFRESH_TOKEN_EXPIRE,
+        mutatePayload: true,
+      };
       const mockJwtToken = {
         sign: jest.fn().mockImplementation(() => 'mock_token'),
       };

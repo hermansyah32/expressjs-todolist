@@ -17,13 +17,14 @@ export default class JwtTokenManager extends TokenManager {
 
   async createAccessToken(payload) {
     return this._jwt.sign(payload, process.env.ACCESS_TOKEN_KEY, {
-      expiresIn: ACCESS_TOKEN_EXPIRE,
+      expiresIn: ACCESS_TOKEN_EXPIRE
     });
   }
 
   async createRefreshToken(payload) {
     return this._jwt.sign(payload, process.env.REFRESH_TOKEN_KEY, {
       expiresIn: REFRESH_TOKEN_EXPIRE,
+      mutatePayload: true // set feedback to payload
     });
   }
 
