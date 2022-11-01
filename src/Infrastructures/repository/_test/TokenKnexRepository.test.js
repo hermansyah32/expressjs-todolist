@@ -7,6 +7,7 @@ import { testing as testingEnv } from '../../../../tests/knexfileTestHelper';
 import TokenKnexRepository from '../TokenKnexRepository';
 import DatabaseError from '../../../Commons/exceptions/DatabaseError';
 import NotFoundError from '../../../Commons/exceptions/NotFoundError';
+import dayjs from 'dayjs';
 
 describe('TokenKnexRepository', () => {
   afterEach(async () => {
@@ -16,7 +17,7 @@ describe('TokenKnexRepository', () => {
   describe('store function', () => {
     it('should running correctly', async () => {
       // Arrange
-      const tokenSchema = new GeneratedToken({ token: 'token' });
+      const tokenSchema = new GeneratedToken({ token: 'token', expired_at: dayjs().format('YYYY-MM-DD HH:mm:ss') });
       const knexConfig = knex(testing);
       const tokenRepository = new TokenKnexRepository(knexConfig);
       // Action
@@ -37,7 +38,7 @@ describe('TokenKnexRepository', () => {
 
     it('should throw DatabaseError if query has error', async () => {
       // Arrange
-      const tokenSchema = new GeneratedToken({ token: 'token' });
+      const tokenSchema = new GeneratedToken({ token: 'token', expired_at: dayjs().format('YYYY-MM-DD HH:mm:ss') });
       const knexConfig = knex(testingEnv);
       const tokenRepository = new TokenKnexRepository(knexConfig);
       // Assert
@@ -50,7 +51,7 @@ describe('TokenKnexRepository', () => {
   describe('getBy function', () => {
     it('should running correctly', async () => {
       // Arrange
-      const tokenSchema = new GeneratedToken({ token: 'token2' });
+      const tokenSchema = new GeneratedToken({ token: 'token2', expired_at: dayjs().format('YYYY-MM-DD HH:mm:ss') });
       const knexConfig = knex(testing);
       const tokenRepository = new TokenKnexRepository(knexConfig);
       await tokenRepository.store(tokenSchema);
@@ -84,7 +85,7 @@ describe('TokenKnexRepository', () => {
   describe('destroyBy function', () => {
     it('should running correctly', async () => {
       // Arrange
-      const tokenSchema = new GeneratedToken({ token: 'token' });
+      const tokenSchema = new GeneratedToken({ token: 'token', expired_at: dayjs().format('YYYY-MM-DD HH:mm:ss') });
       const knexConfig = knex(testing);
       const tokenRepository = new TokenKnexRepository(knexConfig);
       await tokenRepository.store(tokenSchema);
