@@ -20,14 +20,9 @@ describe('TokenKnexRepository', () => {
       const knexConfig = knex(testing);
       const tokenRepository = new TokenKnexRepository(knexConfig);
       // Action
-      await tokenRepository.store(tokenSchema);
+      const  result = await tokenRepository.store(tokenSchema);
       // Assert
-      const result = await knexConfig(TokenRepository.tableName).where(
-        'token',
-        tokenSchema.token
-      );
-      expect(result.length).toEqual(1);
-      expect(result[0].token).toEqual(tokenSchema.token);
+      expect(result.token).toEqual(tokenSchema.token);
     });
 
     it('should throw InvariantError in not satisfied schema', async () => {
