@@ -14,4 +14,8 @@ export default class SessionRepository {
   async del(key, options = {}) {
     throw new Error('SESSION_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
+
+  async client() {
+    throw new Error('SESSION_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+  }
 }

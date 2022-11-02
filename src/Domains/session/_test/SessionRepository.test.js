@@ -19,5 +19,9 @@ describe('SessionRepository interface', () => {
     await expect(sessionRepository.del('key', {})).rejects.toThrowError(
       'SESSION_REPOSITORY.METHOD_NOT_IMPLEMENTED'
     );
+
+    await expect(sessionRepository.client()).rejects.toThrowError(
+      'SESSION_REPOSITORY.METHOD_NOT_IMPLEMENTED'
+    );
   });
 });
