@@ -13,3 +13,7 @@ export const DATABASE_PORT = process.env.DATABASE_PORT;
 export const DATABASE_NAME = process.env.DATABASE_NAME;
 export const DATABASE_USER = process.env.DATABASE_USER;
 export const DATABASE_PASS = process.env.DATABASE_PASS;
+
+export const REDIS_HOST = process.env.REDIS_HOST;
+export const REDIS_PORT = process.env.REDIS_PORT;
+export const REDIS_PASS = process.env.REDIS_PASS;
