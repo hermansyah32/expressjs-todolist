@@ -20,7 +20,7 @@ describe('TodoKnexRepository', () => {
     it('should running correctly', async () => {
       // Arrange
       const knexConfig = knex(testing);
-      const indexSchema = new IndexSchema();
+      const indexSchema = new IndexSchema({});
       const todoRepository = new TodoKnexRepository(knexConfig);
       const createTodo = new CreateTodo({
         todo: 'Take a note',
@@ -38,7 +38,7 @@ describe('TodoKnexRepository', () => {
     it('should running correctly', async () => {
       // Arrange
       const knexConfig = knex(testing);
-      const indexSchema = new IndexSchema();
+      const indexSchema = new IndexSchema({});
       const todoRepository = new TodoKnexRepository(knexConfig);
       const userPayload = new CreateTodo({
         todo: 'Take a note',
