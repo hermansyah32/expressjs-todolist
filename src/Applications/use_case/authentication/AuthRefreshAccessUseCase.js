@@ -1,8 +1,8 @@
-import DataToken from '../../Domains/authentications/schemas/DataToken';
-import SessionRepository from '../../Domains/session/SessionRepository';
-import AuthAccessToken from '../../Domains/authentications/schemas/AuthAccessToken';
-import TokenManager from '../security/TokenManager';
 import dayjs from 'dayjs';
+import DataToken from '../../../Domains/authentications/schemas/DataToken';
+import SessionRepository from '../../../Domains/session/SessionRepository';
+import AuthAccessToken from '../../../Domains/authentications/schemas/AuthAccessToken';
+import TokenManager from '../../security/TokenManager';
 
 export default class AuthRefreshAccessUseCase {
   /**

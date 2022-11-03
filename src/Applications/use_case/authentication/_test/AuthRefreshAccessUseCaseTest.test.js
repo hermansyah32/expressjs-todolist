@@ -1,7 +1,7 @@
-import TokenManager from '../../security/TokenManager';
-import SessionRepository from '../../../Domains/session/SessionRepository';
+import TokenManager from '../../../security/TokenManager';
+import SessionRepository from '../../../../Domains/session/SessionRepository';
 import AuthRefreshAccessUseCase from '../AuthRefreshAccessUseCase';
-import AuthAccessToken from '../../../Domains/authentications/schemas/AuthAccessToken';
+import AuthAccessToken from '../../../../Domains/authentications/schemas/AuthAccessToken';
 
 describe('AuthRefreshAccessUseCaseTest', () => {
   it('should orchestrating the refresh authentication action correctly', async () => {

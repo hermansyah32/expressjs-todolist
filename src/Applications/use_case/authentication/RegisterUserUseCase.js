@@ -1,12 +1,12 @@
-import UserRepository from '../../Domains/users/UserRepository';
-import TokenManager from '../security/TokenManager';
-import TokenRepository from '../../Domains/authentications/TokenRepository';
-import AuthToken from '../../Domains/authentications/schemas/AuthToken';
-import GeneratedToken from '../../Domains/authentications/schemas/GeneratedToken';
 import dayjs from 'dayjs';
-import { REFRESH_TOKEN_EXPIRE } from '../../Commons/Constants/common';
-import RegisterUser from '../../Domains/users/schemas/RegisterUser';
-import RegisteredUser from '../../Domains/users/schemas/RegisteredUser';
+import UserRepository from '../../../Domains/users/UserRepository';
+import TokenManager from '../../security/TokenManager';
+import TokenRepository from '../../../Domains/authentications/TokenRepository';
+import AuthToken from '../../../Domains/authentications/schemas/AuthToken';
+import GeneratedToken from '../../../Domains/authentications/schemas/GeneratedToken';
+import { REFRESH_TOKEN_EXPIRE } from '../../../Commons/Constants/common';
+import RegisterUser from '../../../Domains/users/schemas/RegisterUser';
+import RegisteredUser from '../../../Domains/users/schemas/RegisteredUser';
 
 export default class RegisterUserUseCase {
   /**

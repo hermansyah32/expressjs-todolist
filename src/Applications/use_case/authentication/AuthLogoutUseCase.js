@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
-import DataToken from '../../Domains/authentications/schemas/DataToken';
-import TokenRepository from '../../Domains/authentications/TokenRepository';
-import SessionRepository from '../../Domains/session/SessionRepository';
+import DataToken from '../../../Domains/authentications/schemas/DataToken';
+import TokenRepository from '../../../Domains/authentications/TokenRepository';
+import SessionRepository from '../../../Domains/session/SessionRepository';
 
 export default class AuthLogoutUseCase {
   /**

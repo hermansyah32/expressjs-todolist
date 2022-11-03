@@ -1,6 +1,6 @@
-import TokenRepository from '../../../Domains/authentications/TokenRepository';
+import TokenRepository from '../../../../Domains/authentications/TokenRepository';
 import AuthLogoutUseCase from '../AuthLogoutUseCase';
-import SessionRepository from '../../../Domains/session/SessionRepository';
+import SessionRepository from '../../../../Domains/session/SessionRepository';
 
 describe('AuthLogoutUseCase', () => {
   it('should orchestrating the delete authentication action correctly', async () => {

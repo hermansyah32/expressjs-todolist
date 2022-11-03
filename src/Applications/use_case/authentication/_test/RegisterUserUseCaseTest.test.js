@@ -1,13 +1,12 @@
 import dayjs from "dayjs";
-import AuthToken from "../../../Domains/authentications/schemas/AuthToken";
-import GeneratedToken from "../../../Domains/authentications/schemas/GeneratedToken";
-import TokenRepository from "../../../Domains/authentications/TokenRepository";
-import PasswordUser from "../../../Domains/users/schemas/PasswordUser";
-import UserRepository from "../../../Domains/users/UserRepository";
-import TokenManager from "../../security/TokenManager";
+import AuthToken from "../../../../Domains/authentications/schemas/AuthToken";
+import GeneratedToken from "../../../../Domains/authentications/schemas/GeneratedToken";
+import TokenRepository from "../../../../Domains/authentications/TokenRepository";
+import UserRepository from "../../../../Domains/users/UserRepository";
+import TokenManager from "../../../security/TokenManager";
 import RegisterUserUseCase from "../RegisterUserUseCase";
-import RegisterUser from '../../../Domains/users/schemas/RegisterUser';
-import RegisteredUser from '../../../Domains/users/schemas/RegisteredUser';
+import RegisterUser from '../../../../Domains/users/schemas/RegisterUser';
+import RegisteredUser from '../../../../Domains/users/schemas/RegisteredUser';
 
 describe('RegisterUserUseCase', () => { 
     it('should orchestrating the get authentication action correctly', async () => {

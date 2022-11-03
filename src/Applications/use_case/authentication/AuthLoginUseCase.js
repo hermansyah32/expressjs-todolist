@@ -1,13 +1,13 @@
-import PasswordHash from '../security/PasswordHash';
-import UserLogin from '../../Domains/users/schemas/UserLogin';
-import UserRepository from '../../Domains/users/UserRepository';
-import TokenManager from '../security/TokenManager';
-import TokenRepository from '../../Domains/authentications/TokenRepository';
-import AuthenticationError from '../../Commons/exceptions/AuthenticationError';
-import AuthToken from '../../Domains/authentications/schemas/AuthToken';
-import GeneratedToken from '../../Domains/authentications/schemas/GeneratedToken';
 import dayjs from 'dayjs';
-import { REFRESH_TOKEN_EXPIRE } from '../../Commons/Constants/common';
+import PasswordHash from '../../security/PasswordHash';
+import UserLogin from '../../../Domains/users/schemas/UserLogin';
+import UserRepository from '../../../Domains/users/UserRepository';
+import TokenManager from '../../security/TokenManager';
+import TokenRepository from '../../../Domains/authentications/TokenRepository';
+import AuthenticationError from '../../../Commons/exceptions/AuthenticationError';
+import AuthToken from '../../../Domains/authentications/schemas/AuthToken';
+import GeneratedToken from '../../../Domains/authentications/schemas/GeneratedToken';
+import { REFRESH_TOKEN_EXPIRE } from '../../../Commons/Constants/common';
 
 export default class AuthLoginUseCase {
   /**
