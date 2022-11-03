@@ -1,26 +1,40 @@
-import AuthToken from '../AuthToken';
+import DataToken from '../DataToken';
 
-describe('AuthToken', () => {
+describe('DataToken', () => {
   it('should throw error when payload not contain needed property', () => {
-    expect(() => new AuthToken({})).toThrowError(
+    expect(() => new DataToken({})).toThrowError(
       'SCHEMA_GENERATED_TOKEN.VALIDATION_ERROR'
     );
   });
 
   it('should create object correctly', () => {
     const payload = {
-      accessToken: 'accessToken',
-      refreshToken: 'refreshToken',
+      accessToken: 'access_token',
+      refreshToken: 'refresh_token',
       dataPayload: {
         iat: 123,
         exp: 123,
-        session: 'session_id',
         username: 'username',
       },
     };
-    const authToken = new AuthToken(payload);
+    const dataToken = new DataToken(payload);
 
-    expect(authToken.accessToken).toEqual(payload.accessToken);
-    expect(authToken.refreshToken).toEqual(payload.refreshToken);
+    expect(dataToken.accessToken).toEqual(payload.accessToken);
+    expect(dataToken.refreshToken).toEqual(payload.refreshToken);
+  });
+
+  it('should create object correctly without refreshToken', () => {
+    const payload = {
+      accessToken: 'access_token',
+      dataPayload: {
+        iat: 123,
+        exp: 123,
+        username: 'username',
+      },
+    };
+    const dataToken = new DataToken(payload);
+
+    expect(dataToken.accessToken).toEqual(payload.accessToken);
+    expect(dataToken.refreshToken).toEqual(null);
   });
 });

@@ -2,20 +2,20 @@ import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import ValidationError from '../../../Commons/exceptions/ValidationError';
 
-export default class AuthRefreshToken {
+export default class AuthAccessToken {
   constructor(payload) {
     this._verifyInput(payload);
 
-    const { refreshToken } = payload;
-    this.refreshToken = refreshToken;
+    const { accessToken } = payload;
+    this.accessToken = accessToken;
   }
 
-  _verifyInput({ refreshToken }) {
+  _verifyInput({ accessToken }) {
     const AJVInstance = new Ajv();
     addFormats(AJVInstance);
 
     const validate = AJVInstance.compile(this._jsonSchema());
-    const isValid = validate({ refreshToken });
+    const isValid = validate({ accessToken });
     if (!isValid)
       throw new ValidationError(
         'SCHEMA_GENERATED_TOKEN.VALIDATION_ERROR',
@@ -27,9 +27,9 @@ export default class AuthRefreshToken {
     return {
       type: 'object',
       properties: {
-        refreshToken: { type: 'string' },
+        accessToken: { type: 'string' },
       },
-      required: ['refreshToken'],
+      required: ['accessToken'],
       additionalProperties: false,
     };
   }

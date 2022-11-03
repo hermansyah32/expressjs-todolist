@@ -4,12 +4,22 @@ import ValidationError from '../../../Commons/exceptions/ValidationError';
 
 export default class DataToken {
   constructor(payload) {
+    if (!payload.refreshToken) payload.refreshToken = null;
     this._verifyInput(payload);
 
     const { accessToken, refreshToken, dataPayload } = payload;
     this.accessToken = accessToken;
     this.refreshToken = refreshToken;
+    /** @type {{iat, exp, username}} */
     this.dataPayload = dataPayload; // data payload get from accessToken
+  }
+
+  slicedAccessToken() {
+    return [].join(this.accessToken.split('.').map((key) => key.slice(0, 5)));
+  }
+
+  slicedRefreshToken() {
+    return [].join(this.refreshToken.split('.').map((key) => key.slice(0, 5)));
   }
 
   _verifyInput({ accessToken, refreshToken, dataPayload }) {
@@ -30,16 +40,15 @@ export default class DataToken {
       type: 'object',
       properties: {
         accessToken: { type: 'string' },
-        refreshToken: { type: 'string' },
+        refreshToken: { type: ['string', 'null'] },
         dataPayload: {
           type: 'object',
           properties: {
             iat: { type: 'number' },
             exp: { type: 'number' },
-            session: { type: 'string' },
             username: { type: 'string' },
           },
-          required: ['session', 'username', 'iat', 'exp'],
+          required: ['username', 'iat', 'exp'],
         },
       },
       required: ['accessToken', 'refreshToken', 'dataPayload'],
