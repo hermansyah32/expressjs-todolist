@@ -20,7 +20,7 @@ describe('UserKnexRepository', () => {
     it('should running correctly', async () => {
       // Arrange
       const knexConfig = knex(testing);
-      const indexSchema = new IndexSchema();
+      const indexSchema = new IndexSchema({});
       const userRepository = new UserKnexRepository(knexConfig);
       const registerUser = new RegisterUser({
         username: 'newUsername',
@@ -40,7 +40,7 @@ describe('UserKnexRepository', () => {
     it('should running correctly', async () => {
       // Arrange
       const knexConfig = knex(testing);
-      const indexSchema = new IndexSchema();
+      const indexSchema = new IndexSchema({});
       const userRepository = new UserKnexRepository(knexConfig);
       const userPayload = new RegisterUser({
         username: 'newUsername',

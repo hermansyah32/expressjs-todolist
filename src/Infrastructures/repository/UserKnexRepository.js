@@ -182,7 +182,7 @@ export default class UserKnexRepository extends UserRepository {
       if (registeredUser.length < 1)
         throw new NotFoundError('User data not found');
       const updateUser = new RegisteredUser(registeredUser[0], true);
-      Object.assign(updateUser, payload);
+      updateUser.assign(payload);
 
       await this._knex(UserRepository.tableName)
         .where(column, value)
