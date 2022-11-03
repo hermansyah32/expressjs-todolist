@@ -8,7 +8,6 @@ import PasswordHash from "../../security/PasswordHash";
 import TokenManager from "../../security/TokenManager";
 import AuthLoginUseCase from "../AuthLoginUseCase";
 
-
 describe('AuthLoginUseCase', () => { 
     it('should orchestrating the get authentication action correctly', async () => {
         // Arrange

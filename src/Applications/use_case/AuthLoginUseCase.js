@@ -32,8 +32,7 @@ export default class AuthLoginUseCase {
 
     const tokenPayload = { username: userLogin.username }; // refreshToken will be mutated ang get expired seconds
     const accessToken = await this._tokenManager.createAccessToken(tokenPayload);
-    const refreshToken = await this._tokenManager.createRefreshToken(tokenPayload); 
-    // if (!tokenPayload.exp) throw new AuthenticationError("Cannot process your request. Server got error generating credential.");
+    const refreshToken = await this._tokenManager.createRefreshToken(tokenPayload);
 
     const expiredAt = tokenPayload.exp 
       ? dayjs(tokenPayload.exp * 1000).format('YYYY-MM-DD HH:mm:ss') 
