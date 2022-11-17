@@ -17,12 +17,11 @@ export default class AuthLogoutUseCase {
   async execute(payload) {
     const dataToken = new DataToken(payload);
     // remove session. access token and refresh token
-
     await this._tokenRepository.destroyBy(dataToken.refreshToken);
     await this._sessionRepository.set(
       `logout:${dataToken.slicedAccessToken()}`,
       1,
-      { EX: dayjs(dataToken.dataPayload.exp).diff(dayjs(), 'second') }
+      { EX: dayjs(dataToken.dataPayload.exp * 1000).diff(dayjs(), 'second') }
     );
   }
 }

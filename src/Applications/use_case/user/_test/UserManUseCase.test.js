@@ -26,7 +26,7 @@ describe('UserManUseCase', () => {
       }
       const mockUserRepository = new UserRepository();
       mockUserRepository.index = jest.fn().mockImplementation(() => Promise.resolve(expectedResult));
-      const userManUseCase = new UserManUserCase(mockUserRepository);
+      const userManUseCase = new UserManUserCase({userRepository: mockUserRepository});
 
       // Action
       const result = await userManUseCase.index(payload);
@@ -58,7 +58,7 @@ describe('UserManUseCase', () => {
       }
       const mockUserRepository = new UserRepository();
       mockUserRepository.indexTrashed = jest.fn().mockImplementation(() => Promise.resolve(expectedResult));
-      const userManUseCase = new UserManUserCase(mockUserRepository);
+      const userManUseCase = new UserManUserCase({userRepository: mockUserRepository});
 
       // Action
       const result = await userManUseCase.indexTrashed(payload);
@@ -83,7 +83,7 @@ describe('UserManUseCase', () => {
       
       const mockUserRepository = new UserRepository();
       mockUserRepository.store = jest.fn().mockImplementation(() => Promise.resolve(expectedResult));
-      const userManUseCase = new UserManUserCase(mockUserRepository);
+      const userManUseCase = new UserManUserCase({userRepository: mockUserRepository});
 
       // Action
       const result = await userManUseCase.store(payload);
@@ -107,7 +107,7 @@ describe('UserManUseCase', () => {
       
       const mockUserRepository = new UserRepository();
       mockUserRepository.getBy = jest.fn().mockImplementation(() => Promise.resolve(expectedResult));
-      const userManUseCase = new UserManUserCase(mockUserRepository);
+      const userManUseCase = new UserManUserCase({userRepository: mockUserRepository});
 
       // Action
       const result = await userManUseCase.show(payload.id);
@@ -131,7 +131,7 @@ describe('UserManUseCase', () => {
       
       const mockUserRepository = new UserRepository();
       mockUserRepository.getTrashedBy = jest.fn().mockImplementation(() => Promise.resolve(expectedResult));
-      const userManUseCase = new UserManUserCase(mockUserRepository);
+      const userManUseCase = new UserManUserCase({userRepository: mockUserRepository});
 
       // Action
       const result = await userManUseCase.showTrashed(payload.id);
@@ -155,7 +155,7 @@ describe('UserManUseCase', () => {
       
       const mockUserRepository = new UserRepository();
       mockUserRepository.updateBy = jest.fn().mockImplementation(() => Promise.resolve(expectedResult));
-      const userManUseCase = new UserManUserCase(mockUserRepository);
+      const userManUseCase = new UserManUserCase({userRepository: mockUserRepository});
 
       // Action
       const result = await userManUseCase.update(payload.id, {username: 'hermansyahp8'});
@@ -179,7 +179,7 @@ describe('UserManUseCase', () => {
       
       const mockUserRepository = new UserRepository();
       mockUserRepository.restoreBy = jest.fn().mockImplementation(() => Promise.resolve(expectedResult));
-      const userManUseCase = new UserManUserCase(mockUserRepository);
+      const userManUseCase = new UserManUserCase({userRepository: mockUserRepository});
 
       // Action
       const result = await userManUseCase.restore(payload.id);
@@ -197,7 +197,7 @@ describe('UserManUseCase', () => {
       
       const mockUserRepository = new UserRepository();
       mockUserRepository.destroyBy = jest.fn().mockImplementation(() => Promise.resolve());
-      const userManUseCase = new UserManUserCase(mockUserRepository);
+      const userManUseCase = new UserManUserCase({userRepository: mockUserRepository});
 
       // Action
       await userManUseCase.destroy(id);
@@ -214,7 +214,7 @@ describe('UserManUseCase', () => {
       
       const mockUserRepository = new UserRepository();
       mockUserRepository.permanentDestroyBy = jest.fn().mockImplementation(() => Promise.resolve());
-      const userManUseCase = new UserManUserCase(mockUserRepository);
+      const userManUseCase = new UserManUserCase({userRepository: mockUserRepository});
 
       // Action
       await userManUseCase.permanentDestroy(id);

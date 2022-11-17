@@ -26,7 +26,7 @@ describe('TodoManUserCase', () => {
       }
       const mockTodoRepository = new TodoRepository();
       mockTodoRepository.index = jest.fn().mockImplementation(() => Promise.resolve(expectedResult));
-      const todoManUseCase = new TodoManUserCase(mockTodoRepository);
+      const todoManUseCase = new TodoManUserCase({todoRepository: mockTodoRepository});
 
       // Action
       const result = await todoManUseCase.index(payload);
@@ -58,7 +58,7 @@ describe('TodoManUserCase', () => {
       }
       const mockTodoRepository = new TodoRepository();
       mockTodoRepository.indexTrashed = jest.fn().mockImplementation(() => Promise.resolve(expectedResult));
-      const todoManUseCase = new TodoManUserCase(mockTodoRepository);
+      const todoManUseCase = new TodoManUserCase({todoRepository: mockTodoRepository});
 
       // Action
       const result = await todoManUseCase.indexTrashed(payload);
@@ -81,7 +81,7 @@ describe('TodoManUserCase', () => {
       
       const mockTodoRepository = new TodoRepository();
       mockTodoRepository.store = jest.fn().mockImplementation(() => Promise.resolve(expectedResult));
-      const todoManUseCase = new TodoManUserCase(mockTodoRepository);
+      const todoManUseCase = new TodoManUserCase({todoRepository: mockTodoRepository});
 
       // Action
       const result = await todoManUseCase.store(payload);
@@ -104,7 +104,7 @@ describe('TodoManUserCase', () => {
       
       const mockTodoRepository = new TodoRepository();
       mockTodoRepository.getBy = jest.fn().mockImplementation(() => Promise.resolve(expectedResult));
-      const todoManUseCase = new TodoManUserCase(mockTodoRepository);
+      const todoManUseCase = new TodoManUserCase({todoRepository: mockTodoRepository});
 
       // Action
       const result = await todoManUseCase.show(payload.id);
@@ -127,7 +127,7 @@ describe('TodoManUserCase', () => {
       
       const mockTodoRepository = new TodoRepository();
       mockTodoRepository.getTrashedBy = jest.fn().mockImplementation(() => Promise.resolve(expectedResult));
-      const todoManUseCase = new TodoManUserCase(mockTodoRepository);
+      const todoManUseCase = new TodoManUserCase({todoRepository: mockTodoRepository});
 
       // Action
       const result = await todoManUseCase.showTrashed(payload.id);
@@ -150,7 +150,7 @@ describe('TodoManUserCase', () => {
       
       const mockTodoRepository = new TodoRepository();
       mockTodoRepository.updateBy = jest.fn().mockImplementation(() => Promise.resolve(expectedResult));
-      const todoManUseCase = new TodoManUserCase(mockTodoRepository);
+      const todoManUseCase = new TodoManUserCase({todoRepository: mockTodoRepository});
 
       // Action
       const result = await todoManUseCase.update(payload.id, {todo: 'Javascript Presentation Title'});
@@ -173,7 +173,7 @@ describe('TodoManUserCase', () => {
       
       const mockTodoRepository = new TodoRepository();
       mockTodoRepository.restoreBy = jest.fn().mockImplementation(() => Promise.resolve(expectedResult));
-      const todoManUseCase = new TodoManUserCase(mockTodoRepository);
+      const todoManUseCase = new TodoManUserCase({todoRepository: mockTodoRepository});
 
       // Action
       const result = await todoManUseCase.restore(payload.id);
@@ -191,7 +191,7 @@ describe('TodoManUserCase', () => {
       
       const mockTodoRepository = new TodoRepository();
       mockTodoRepository.destroyBy = jest.fn().mockImplementation(() => Promise.resolve());
-      const todoManUseCase = new TodoManUserCase(mockTodoRepository);
+      const todoManUseCase = new TodoManUserCase({todoRepository: mockTodoRepository});
 
       // Action
       await todoManUseCase.destroy(id);
@@ -208,7 +208,7 @@ describe('TodoManUserCase', () => {
       
       const mockTodoRepository = new TodoRepository();
       mockTodoRepository.permanentDestroyBy = jest.fn().mockImplementation(() => Promise.resolve());
-      const todoManUseCase = new TodoManUserCase(mockTodoRepository);
+      const todoManUseCase = new TodoManUserCase({todoRepository: mockTodoRepository});
 
       // Action
       await todoManUseCase.permanentDestroy(id);

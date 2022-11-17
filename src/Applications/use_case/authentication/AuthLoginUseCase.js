@@ -8,6 +8,7 @@ import AuthenticationError from '../../../Commons/exceptions/AuthenticationError
 import AuthToken from '../../../Domains/authentications/schemas/AuthToken';
 import GeneratedToken from '../../../Domains/authentications/schemas/GeneratedToken';
 import { REFRESH_TOKEN_EXPIRE } from '../../../Commons/Constants/common';
+import RegisteredUser from '../../../Domains/users/schemas/RegisteredUser';
 
 export default class AuthLoginUseCase {
   /**
@@ -26,7 +27,7 @@ export default class AuthLoginUseCase {
 
   async execute(payload) {
     const userLogin = new UserLogin(payload);
-    const userPassword = await this._userRepository.getPasswordBy('username', userLogin.username);
+    const userPassword = await this._userRepository.getWithPassword(userLogin.username, userLogin.email);
     const isAuthenticated = await this._passwordHash.compare(userLogin.password, userPassword.password);
     if (!isAuthenticated) throw new AuthenticationError("Credential doesn't match");
 
@@ -43,6 +44,9 @@ export default class AuthLoginUseCase {
       expired_at: expiredAt
     });
     await this._tokenRepository.store(generatedToken);
-    return authToken;
+    return {
+      token: authToken,
+      data: new RegisteredUser({...userPassword})
+    };
   }
 }

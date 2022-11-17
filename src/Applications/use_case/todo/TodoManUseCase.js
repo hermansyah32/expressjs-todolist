@@ -2,7 +2,7 @@ import IndexSchema from "../../../Domains/IndexSchema";
 import CreateTodo from "../../../Domains/todos/schemas/CreateTodo";
 
 export default class TodoManUserCase {
-  constructor(todoRepository) {
+  constructor({todoRepository}) {
     this._todoRepository = todoRepository;
   }
 

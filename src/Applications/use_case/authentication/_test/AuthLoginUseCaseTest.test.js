@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import AuthToken from "../../../../Domains/authentications/schemas/AuthToken";
 import GeneratedToken from "../../../../Domains/authentications/schemas/GeneratedToken";
 import TokenRepository from "../../../../Domains/authentications/TokenRepository";
-import PasswordUser from "../../../../Domains/users/schemas/PasswordUser";
+import PasswordUser from "../../../../Domains/users/schemas/UserWithPassword";
 import UserRepository from "../../../../Domains/users/UserRepository";
 import PasswordHash from "../../../security/PasswordHash";
 import TokenManager from "../../../security/TokenManager";
@@ -29,7 +29,7 @@ describe('AuthLoginUseCase', () => {
         const mockPasswordHash = new PasswordHash();
 
         // Mocking
-        mockUserRepository.getPasswordBy = jest.fn().mockImplementation(() => (
+        mockUserRepository.getWithPassword = jest.fn().mockImplementation(() => (
             Promise.resolve(new PasswordUser({
                 id: 'id',
                 password: 'hashed_password'
@@ -53,11 +53,11 @@ describe('AuthLoginUseCase', () => {
         })
 
         // Action 
-        const actualAuthentication = await authLoginUseCase.execute(useCasePayload);
+        const result = await authLoginUseCase.execute(useCasePayload);
 
         // Assert
-        expect(actualAuthentication).toEqual(expectedAuthentication);
-        expect(mockUserRepository.getPasswordBy).toBeCalledWith('username', useCasePayload.username);
+        expect(result.token).toEqual(expectedAuthentication);
+        expect(mockUserRepository.getWithPassword).toBeCalledWith(useCasePayload.username, useCasePayload.email);
         expect(mockPasswordHash.compare).toBeCalledWith(useCasePayload.password, 'hashed_password');
         expect(mockTokenManger.createAccessToken).toBeCalledWith({username: useCasePayload.username});
         expect(mockTokenManger.createRefreshToken).toBeCalledWith({username: useCasePayload.username});

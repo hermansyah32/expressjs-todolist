@@ -2,7 +2,7 @@ import IndexSchema from "../../../Domains/IndexSchema";
 import RegisterUser from "../../../Domains/users/schemas/RegisterUser";
 
 export default class UserManUserCase {
-  constructor(userRepository) {
+  constructor({userRepository}) {
     this._userRepository = userRepository;
   }
 
