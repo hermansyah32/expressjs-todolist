@@ -11,3 +11,6 @@ node_modules
 
 # Jest coverage output
 coverage
+
+# ignore thunder client env
+thunder-tests/thunderEnvironment.json
