@@ -7,6 +7,10 @@ export default class TokenManager {
     throw new Error('TOKEN_MANAGER.METHOD_NOT_IMPLEMENTED');
   }
 
+  async verifyAccessToken(token) {
+    throw new Error('TOKEN_MANAGER.METHOD_NOT_IMPLEMENTED');
+  }
+
   async verifyRefreshToken(token) {
     throw new Error('TOKEN_MANAGER.METHOD_NOT_IMPLEMENTED');
   }
