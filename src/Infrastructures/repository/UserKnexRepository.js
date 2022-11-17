@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 import bcrypt from 'bcrypt';
 import BcryptPasswordHash from '../security/BcryptPasswordHash';
 import DatabaseError from '../../Commons/exceptions/DatabaseError';
-import PasswordUser from '../../Domains/users/schemas/PasswordUser';
+import UserWithPassword from '../../Domains/users/schemas/UserWithPassword';
 
 export default class UserKnexRepository extends UserRepository {
   /**
@@ -83,7 +83,7 @@ export default class UserKnexRepository extends UserRepository {
       payload.password = await passwordHash.hash(payload.password);
 
       await this._knex(UserRepository.tableName).insert(payload);
-      return payload;
+      return new RegisteredUser(payload);
     } catch (error) {
       throw new DatabaseError(error.message, {
         sqlState: error.sqlState,
@@ -131,6 +131,32 @@ export default class UserKnexRepository extends UserRepository {
       if (result.length < 1) throw new NotFoundError('User data not found');
 
       return new PasswordUser(result[0]);
+    } catch (error) {
+      if (error instanceof NotFoundError === false) {
+        throw new DatabaseError(error.message, {
+          sqlState: error.sqlState,
+          sqlMessage: error.sqlMessage,
+          sql: error.sql,
+        });
+      }
+      throw error;
+    }
+  }
+
+  /**
+   * Find password by username or email
+   * @param {string} username
+   * @param {string} email
+   */
+   async getWithPassword(username, email) {
+    try {
+      const result = await this._knex(UserRepository.tableName)
+        .where('username', username)
+        .orWhere('email', email)
+        .whereNull('deleted_at');
+      if (result.length < 1) throw new NotFoundError('User data not found');
+
+      return new UserWithPassword(result[0]);
     } catch (error) {
       if (error instanceof NotFoundError === false) {
         throw new DatabaseError(error.message, {

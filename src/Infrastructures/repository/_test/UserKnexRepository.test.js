@@ -60,6 +60,28 @@ describe('UserKnexRepository', () => {
     });
   });
 
+  describe('getWithPassword function', () => {
+    it('should running correctly', async () => {
+      // Arrange
+      const knexConfig = knex(testing);
+      const registerUser = new RegisterUser({
+        username: 'newUsername',
+        email: 'new@user.com',
+        fullname: 'New User',
+        password: 'password',
+      });
+      const userRepository = new UserKnexRepository(knexConfig);
+      await knexConfig(UserRepository.tableName).insert(registerUser);
+
+      // Action
+      const result = await userRepository.getWithPassword(registerUser.username, registerUser.email);
+
+      // Assert
+      expect(result.id).toBeTruthy();
+      expect(result.password).toEqual(registerUser.password);
+    });
+  });
+
   describe('store function', () => {
     it('should running correctly', async () => {
       // Arrange
