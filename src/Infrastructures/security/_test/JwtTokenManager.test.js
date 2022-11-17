@@ -60,6 +60,34 @@ describe('JwtTokenManager', () => {
     });
   });
 
+  describe('verifyAccessToken function', () => {
+    it('should throw InvariantError when verification failed', async () => {
+      // Arrange
+      const jwtTokenManager = new JwtTokenManager(jwt);
+      const accessToken = await jwtTokenManager.createRefreshToken({
+        username: 'hermansyah32',
+      });
+
+      // Action & Assert
+      await expect(
+        jwtTokenManager.verifyAccessToken(accessToken)
+      ).rejects.toThrow(InvariantError);
+    });
+
+    it('should not throw InvariantError when acess token verified', async () => {
+      // Arrange
+      const jwtTokenManager = new JwtTokenManager(jwt);
+      const accessToken = await jwtTokenManager.createAccessToken({
+        username: 'hermansyah32',
+      });
+
+      // Action & Assert
+      await expect(
+        jwtTokenManager.verifyAccessToken(accessToken)
+      ).resolves.not.toThrow(InvariantError);
+    });
+  });
+
   describe('verifyRefreshToken function', () => {
     it('should throw InvariantError when verification failed', async () => {
       // Arrange

@@ -28,9 +28,17 @@ export default class JwtTokenManager extends TokenManager {
     });
   }
 
+  async verifyAccessToken(token) {
+    try {
+      return this._jwt.verify(token, process.env.ACCESS_TOKEN_KEY);
+    } catch (error) {
+      throw new InvariantError('token is invalid');
+    }
+  }
+
   async verifyRefreshToken(token) {
     try {
-      this._jwt.verify(token, process.env.REFRESH_TOKEN_KEY);
+      return this._jwt.verify(token, process.env.REFRESH_TOKEN_KEY);
     } catch (error) {
       throw new InvariantError('refresh token is invalid');
     }
