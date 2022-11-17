@@ -24,23 +24,23 @@ describe('BcryptPasswordHash', () => {
       // Arrange
       const bcryptPasswordHash = new BcryptPasswordHash(bcrypt);
 
-      // Action & Assert
-      await expect(
-        bcryptPasswordHash.compare('plain_password', 'encrypted_password')
-      ).rejects.toThrow(AuthenticationError);
+      // Action 
+      const result = await bcryptPasswordHash.compare('plain_password', 'encrypted_password');
+      // Assert
+      expect(result).toEqual(false);
     });
 
     it('should not return AuthenticationError if password match', async () => {
       // Arrange
       const bcryptPasswordHash = new BcryptPasswordHash(bcrypt);
       const plainPassword = 'secret';
-      // Action
       const encryptedPassword = await bcryptPasswordHash.hash(plainPassword);
 
+      // Action
+      const result = await bcryptPasswordHash.compare(plainPassword, encryptedPassword);
+
       // Assert
-      await expect(
-        bcryptPasswordHash.compare(plainPassword, encryptedPassword)
-      ).resolves.not.toThrow(AuthenticationError);
+      await expect(result).toEqual(true)
     });
   });
 });

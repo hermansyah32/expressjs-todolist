@@ -14,9 +14,6 @@ export default class BcryptPasswordHash extends PasswordHash {
 
   async compare(password, hashedPassword) {
     const result = await this._bcrypt.compare(password, hashedPassword);
-
-    if (!result) {
-      throw new AuthenticationError('invalid credential');
-    }
+    return result;
   }
 }
