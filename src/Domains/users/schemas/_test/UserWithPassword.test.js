@@ -1,12 +1,12 @@
-import PasswordUser from '../PasswordUser';
+import UserWithPassword from '../UserWithPassword';
 
-describe('PasswordUser schemas', () => {
+describe('UserWithPassword schemas', () => {
   it('should throw error when payload not contain needed property', () => {
     const payload = {
       password: 'password',
     };
 
-    expect(() => new PasswordUser(payload)).toThrowError(
+    expect(() => new UserWithPassword(payload)).toThrowError(
       'SCHEMA_PASSWORD_USER.VALIDATION_ERROR'
     );
   });
@@ -16,7 +16,7 @@ describe('PasswordUser schemas', () => {
       id: 'id',
       password: 'password',
     };
-    const passwordUser = new PasswordUser(payload);
+    const passwordUser = new UserWithPassword(payload);
 
     expect(passwordUser.id).toEqual(payload.id);
     expect(passwordUser.password).toEqual(payload.password);
