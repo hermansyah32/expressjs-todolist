@@ -1,0 +1,152 @@
+[
+  {
+    "_id": "4570f59e-542e-4863-b870-3d71c742d90c",
+    "colId": "984e1d68-1047-4145-96d8-d43987195191",
+    "containerId": "",
+    "name": "Auth login",
+    "url": "{{protocol}}://{{host}}/api/auth/login",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2022-11-16T08:31:36.743Z",
+    "modified": "2022-11-16T10:24:14.987Z",
+    "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"username\": \"me@hermansyah.dev\",\n  \"password\": \"password\"\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "set-env-var",
+        "custom": "json.body.token.accessToken",
+        "action": "setto",
+        "value": "{{access_token}}"
+      },
+      {
+        "type": "set-env-var",
+        "custom": "json.body.token.refreshToken",
+        "action": "setto",
+        "value": "{{refresh_token}}"
+      }
+    ]
+  },
+  {
+    "_id": "d0581cc8-d45d-441e-8e0b-8f1df2b0d1e8",
+    "colId": "984e1d68-1047-4145-96d8-d43987195191",
+    "containerId": "",
+    "name": "Auth logout",
+    "url": "{{protocol}}://{{host}}/api/auth/logout",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-11-16T10:08:40.131Z",
+    "modified": "2022-11-17T12:33:48.735Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{access_token}}"
+    },
+    "tests": [
+      {
+        "type": "set-env-var",
+        "custom": " ",
+        "action": "setto",
+        "value": "{{access_token}}"
+      },
+      {
+        "type": "set-env-var",
+        "custom": " ",
+        "action": "setto",
+        "value": "{{refresh_token}}"
+      }
+    ],
+    "preReq": {
+      "runRequests": [
+        {
+          "reqId": "4570f59e-542e-4863-b870-3d71c742d90c",
+          "colId": "984e1d68-1047-4145-96d8-d43987195191",
+          "triggerCondition": "run-var-empty",
+          "triggerValue": "{{access_token}}"
+        }
+      ]
+    }
+  },
+  {
+    "_id": "36ba6565-3446-4187-ba75-4bf6d93b7574",
+    "colId": "984e1d68-1047-4145-96d8-d43987195191",
+    "containerId": "",
+    "name": "Auth register",
+    "url": "{{protocol}}://{{host}}/api/auth/register",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2022-11-17T12:29:16.591Z",
+    "modified": "2022-11-17T12:31:04.876Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"fullname\": \"Yor\",\n  \"email\": \"yor@example.com\",\n  \"username\": \"yor@example.com\",\n  \"password\": \"password\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{access_token}}"
+    },
+    "tests": [],
+    "preReq": {
+      "runRequests": [
+        {
+          "reqId": "4570f59e-542e-4863-b870-3d71c742d90c",
+          "colId": "984e1d68-1047-4145-96d8-d43987195191",
+          "triggerCondition": "run-var-empty",
+          "triggerValue": "{{access_token}}"
+        }
+      ]
+    }
+  },
+  {
+    "_id": "1178d093-3546-4b62-8036-441aeefc8784",
+    "colId": "984e1d68-1047-4145-96d8-d43987195191",
+    "containerId": "",
+    "name": "Auth refresh",
+    "url": "{{protocol}}://{{host}}/api/auth/refresh",
+    "method": "POST",
+    "sortNum": 25000,
+    "created": "2022-11-17T12:29:19.986Z",
+    "modified": "2022-11-17T13:08:16.325Z",
+    "headers": [
+      {
+        "name": "refresh_token",
+        "value": "{{refresh_token}}"
+      }
+    ],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{access_token}}"
+    },
+    "tests": [],
+    "preReq": {
+      "runRequests": [
+        {
+          "reqId": "4570f59e-542e-4863-b870-3d71c742d90c",
+          "colId": "984e1d68-1047-4145-96d8-d43987195191",
+          "triggerCondition": "run-var-empty",
+          "triggerValue": "{{refresh_token}}"
+        }
+      ]
+    }
+  }
+]
