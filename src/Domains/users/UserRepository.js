@@ -48,6 +48,15 @@ export default class UserRepository {
   }
 
   /**
+   * Find password by username or email
+   * @param {string} username
+   * @param {string} email
+   */
+   async getWithPassword(username, email) {
+    throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+  }
+
+  /**
    * Find trashed resources by column and value
    * @param {string} column
    * @param {string} value
