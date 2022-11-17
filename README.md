@@ -1,6 +1,8 @@
 # Commands
 
 - `yarn test` Run jest test.
+- `yarn knex migrate:latest` Run knex migration.
+- `yarn knex seed:run` Run seeder.
 
 # Known Issues
 

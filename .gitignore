@@ -3,8 +3,11 @@ yarn.lock
 
 # Environment variables
 .env
-.env.test
+.env.testing
 .env.production
 
 # Dependency directories
 node_modules
+
+# Jest coverage output
+coverage
