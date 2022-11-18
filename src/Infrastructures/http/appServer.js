@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import logger from '../logger/winstonLog';
 import morgan from 'morgan';
 import * as AuthenticationServe from '../../Interfaces/http/api/authentications/routes';
+import * as TodoServe from '../../Interfaces/http/api/todos/routes';
 import * as Constants from '../../Commons/Constants/common';
 
 export default async function createServer(container) {
@@ -46,6 +47,7 @@ export default async function createServer(container) {
 
   // mount routes
   app.use('/api', AuthenticationServe.serve(container));
+  app.use('/api', TodoServe.serve(container));
 
   // error handler
   app.use(errorHandler.response);
