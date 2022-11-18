@@ -14,3 +14,4 @@ coverage
 
 # ignore thunder client env
 thunder-tests/thunderEnvironment.json
+thunder-tests/*.tmp
