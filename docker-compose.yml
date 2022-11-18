@@ -1,0 +1,48 @@
+version: '3.4'
+
+services:
+  redis:
+    image: redis:latest
+    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "6379:6379"
+    networks:
+      - docker-service
+
+  mariadb:
+    image: mariadb:latest
+    restart: always
+    container_name: docker-mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD: 's3cr3t4dmir3'
+    networks:
+      - docker-service
+    volumes:
+      - maria-data:/data/db
+      
+  todolist:
+    image: todolist
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:443
+    networks:
+      - docker-service
+    depends_on:
+      - mariadb
+      - redis
+
+networks:
+  docker-service:
+    driver: bridge
+
+volumes:
+  maria-data:
+    driver: local
