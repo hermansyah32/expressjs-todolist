@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "babel-node ./src/app.js",
+    "start": "babel-node ./src/app.js",
     "test": "jest --coverage",
     "test:watch": "jest --watchAll --coverage",
     "knex": "babel-node -r dotenv/config ./node_modules/knex/bin/cli.js --knexfile=./src/Infrastructures/database/knexfile.js",
