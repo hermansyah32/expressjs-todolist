@@ -148,5 +148,310 @@
         }
       ]
     }
+  },
+  {
+    "_id": "e9c1e626-3bb0-4991-8622-c4ac804f7397",
+    "colId": "b640213b-07d6-46fb-8c10-0bfe88241e9f",
+    "containerId": "",
+    "name": "Index",
+    "url": "{{protocol}}://{{host}}/api/todos",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-11-18T00:39:02.028Z",
+    "modified": "2022-11-18T00:48:14.221Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{access_token}}"
+    },
+    "tests": [],
+    "preReq": {
+      "runRequests": [
+        {
+          "reqId": "4570f59e-542e-4863-b870-3d71c742d90c",
+          "colId": "984e1d68-1047-4145-96d8-d43987195191",
+          "triggerCondition": "run-mins",
+          "triggerValue": "60"
+        }
+      ]
+    }
+  },
+  {
+    "_id": "1ada7f24-f949-4220-9039-596bd0163708",
+    "colId": "b640213b-07d6-46fb-8c10-0bfe88241e9f",
+    "containerId": "",
+    "name": "Index Trashed",
+    "url": "{{protocol}}://{{host}}/api/trashed/todos",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2022-11-18T00:47:06.645Z",
+    "modified": "2022-11-18T00:48:18.353Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{access_token}}"
+    },
+    "tests": [],
+    "preReq": {
+      "runRequests": [
+        {
+          "reqId": "4570f59e-542e-4863-b870-3d71c742d90c",
+          "colId": "984e1d68-1047-4145-96d8-d43987195191",
+          "triggerCondition": "run-mins",
+          "triggerValue": "60"
+        }
+      ]
+    }
+  },
+  {
+    "_id": "7b48f687-d57d-417b-b8aa-a903635622b3",
+    "colId": "b640213b-07d6-46fb-8c10-0bfe88241e9f",
+    "containerId": "",
+    "name": "Show",
+    "url": "{{protocol}}://{{host}}/api/todos/{{todo_id}}",
+    "method": "GET",
+    "sortNum": 30000,
+    "created": "2022-11-18T00:48:22.570Z",
+    "modified": "2022-11-18T01:15:45.477Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{access_token}}"
+    },
+    "tests": [],
+    "preReq": {
+      "runRequests": [
+        {
+          "reqId": "4570f59e-542e-4863-b870-3d71c742d90c",
+          "colId": "984e1d68-1047-4145-96d8-d43987195191",
+          "triggerCondition": "run-mins",
+          "triggerValue": "60"
+        },
+        {
+          "reqId": "1490cf37-a3be-4185-8592-348a5848f36d",
+          "colId": "b640213b-07d6-46fb-8c10-0bfe88241e9f",
+          "triggerCondition": "run-var-empty",
+          "triggerValue": "{{todo_id}}"
+        }
+      ]
+    }
+  },
+  {
+    "_id": "1490cf37-a3be-4185-8592-348a5848f36d",
+    "colId": "b640213b-07d6-46fb-8c10-0bfe88241e9f",
+    "containerId": "",
+    "name": "Store",
+    "url": "{{protocol}}://{{host}}/api/todos",
+    "method": "POST",
+    "sortNum": 25000,
+    "created": "2022-11-18T00:59:18.674Z",
+    "modified": "2022-11-18T03:55:07.496Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"todo\": \"Take a note\",\n  \"description\": \"Javascript key point\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{access_token}}"
+    },
+    "tests": [
+      {
+        "type": "set-env-var",
+        "custom": "json.body.data.id",
+        "action": "setto",
+        "value": "{{todo_id}}"
+      }
+    ],
+    "preReq": {
+      "runRequests": [
+        {
+          "reqId": "4570f59e-542e-4863-b870-3d71c742d90c",
+          "colId": "984e1d68-1047-4145-96d8-d43987195191",
+          "triggerCondition": "run-mins",
+          "triggerValue": "60"
+        }
+      ]
+    }
+  },
+  {
+    "_id": "6d0ed5fb-7f3c-4e10-915a-5dcab36eed6d",
+    "colId": "b640213b-07d6-46fb-8c10-0bfe88241e9f",
+    "containerId": "",
+    "name": "Show Trashed",
+    "url": "{{protocol}}://{{host}}/api/trashed/todos/{{todo_id}}",
+    "method": "GET",
+    "sortNum": 32500,
+    "created": "2022-11-18T03:53:49.133Z",
+    "modified": "2022-11-18T03:54:31.555Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{access_token}}"
+    },
+    "tests": [],
+    "preReq": {
+      "runRequests": [
+        {
+          "reqId": "4570f59e-542e-4863-b870-3d71c742d90c",
+          "colId": "984e1d68-1047-4145-96d8-d43987195191",
+          "triggerCondition": "run-mins",
+          "triggerValue": "60"
+        },
+        {
+          "reqId": "1490cf37-a3be-4185-8592-348a5848f36d",
+          "colId": "b640213b-07d6-46fb-8c10-0bfe88241e9f",
+          "triggerCondition": "run-var-empty",
+          "triggerValue": "{{todo_id}}"
+        }
+      ]
+    }
+  },
+  {
+    "_id": "58223a71-5007-4931-992c-b82de3e630b5",
+    "colId": "b640213b-07d6-46fb-8c10-0bfe88241e9f",
+    "containerId": "",
+    "name": "Update",
+    "url": "{{protocol}}://{{host}}/api/todos/{{todo_id}}",
+    "method": "PUT",
+    "sortNum": 35000,
+    "created": "2022-11-18T03:54:24.764Z",
+    "modified": "2022-11-18T06:17:59.235Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"todo\": \"Take a note edited\",\n  \"description\": \"Javascript key point\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{access_token}}"
+    },
+    "tests": [],
+    "preReq": {
+      "runRequests": [
+        {
+          "reqId": "4570f59e-542e-4863-b870-3d71c742d90c",
+          "colId": "984e1d68-1047-4145-96d8-d43987195191",
+          "triggerCondition": "run-mins",
+          "triggerValue": "60"
+        },
+        {
+          "reqId": "1490cf37-a3be-4185-8592-348a5848f36d",
+          "colId": "b640213b-07d6-46fb-8c10-0bfe88241e9f",
+          "triggerCondition": "run-var-empty",
+          "triggerValue": "{{todo_id}}"
+        }
+      ]
+    }
+  },
+  {
+    "_id": "3736cc27-7335-4d2b-b43c-ef12cdc24b88",
+    "colId": "b640213b-07d6-46fb-8c10-0bfe88241e9f",
+    "containerId": "",
+    "name": "Restore",
+    "url": "{{protocol}}://{{host}}/api/trashed/todos/{{todo_id}}",
+    "method": "PUT",
+    "sortNum": 45000,
+    "created": "2022-11-18T06:18:09.211Z",
+    "modified": "2022-11-18T06:18:22.638Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{access_token}}"
+    },
+    "tests": [],
+    "preReq": {
+      "runRequests": [
+        {
+          "reqId": "4570f59e-542e-4863-b870-3d71c742d90c",
+          "colId": "984e1d68-1047-4145-96d8-d43987195191",
+          "triggerCondition": "run-mins",
+          "triggerValue": "60"
+        },
+        {
+          "reqId": "1490cf37-a3be-4185-8592-348a5848f36d",
+          "colId": "b640213b-07d6-46fb-8c10-0bfe88241e9f",
+          "triggerCondition": "run-var-empty",
+          "triggerValue": "{{todo_id}}"
+        }
+      ]
+    }
+  },
+  {
+    "_id": "4c022412-323e-4013-856f-38dfbd4be26a",
+    "colId": "b640213b-07d6-46fb-8c10-0bfe88241e9f",
+    "containerId": "",
+    "name": "Destroy",
+    "url": "{{protocol}}://{{host}}/api/todos/{{todo_id}}",
+    "method": "DELETE",
+    "sortNum": 55000,
+    "created": "2022-11-18T06:18:45.890Z",
+    "modified": "2022-11-18T06:18:56.789Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{access_token}}"
+    },
+    "tests": [],
+    "preReq": {
+      "runRequests": [
+        {
+          "reqId": "4570f59e-542e-4863-b870-3d71c742d90c",
+          "colId": "984e1d68-1047-4145-96d8-d43987195191",
+          "triggerCondition": "run-mins",
+          "triggerValue": "60"
+        },
+        {
+          "reqId": "1490cf37-a3be-4185-8592-348a5848f36d",
+          "colId": "b640213b-07d6-46fb-8c10-0bfe88241e9f",
+          "triggerCondition": "run-var-empty",
+          "triggerValue": "{{todo_id}}"
+        }
+      ]
+    }
+  },
+  {
+    "_id": "0d7a0ee7-0308-43a7-b2ee-f63c369480bd",
+    "colId": "b640213b-07d6-46fb-8c10-0bfe88241e9f",
+    "containerId": "",
+    "name": "Permanent Destroy",
+    "url": "{{protocol}}://{{host}}/api/todos/{{todo_id}}",
+    "method": "DELETE",
+    "sortNum": 65000,
+    "created": "2022-11-18T06:19:06.611Z",
+    "modified": "2022-11-18T06:19:06.611Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{access_token}}"
+    },
+    "tests": [],
+    "preReq": {
+      "runRequests": [
+        {
+          "reqId": "4570f59e-542e-4863-b870-3d71c742d90c",
+          "colId": "984e1d68-1047-4145-96d8-d43987195191",
+          "triggerCondition": "run-mins",
+          "triggerValue": "60"
+        },
+        {
+          "reqId": "1490cf37-a3be-4185-8592-348a5848f36d",
+          "colId": "b640213b-07d6-46fb-8c10-0bfe88241e9f",
+          "triggerCondition": "run-var-empty",
+          "triggerValue": "{{todo_id}}"
+        }
+      ]
+    }
   }
 ]
