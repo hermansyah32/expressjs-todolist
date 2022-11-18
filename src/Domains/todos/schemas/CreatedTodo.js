@@ -68,7 +68,7 @@ export default class CreatedTodo {
       properties: {
         id: { type: 'string' },
         todo: { type: 'string' },
-        description: { type: 'string' },
+        description: { type: ['null', 'string'] },
         author_id: { type: ['null', 'string'] },
       },
       required: ['id', 'todo'],

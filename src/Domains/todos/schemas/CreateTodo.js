@@ -10,7 +10,7 @@ export default class CreateTodo {
    * @param {{ todo, description, author_id }} payload
    */
   constructor(payload) {
-    payload.author_id = author_id || null;
+    if (payload && !payload.author_id) payload.author_id = null; // set author_id condition if payload not null/undefined
     this._verifyInput(payload);
 
     const { todo, description, author_id, created_at, updated_at } = payload;
@@ -41,7 +41,7 @@ export default class CreateTodo {
       type: 'object',
       properties: {
         todo: { type: 'string' },
-        description: { type: 'string' },
+        description: { type: ['null', 'string'] },
         author_id: { type: ['null', 'string'] },
       },
       required: ['todo'],
