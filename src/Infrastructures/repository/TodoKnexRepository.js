@@ -98,7 +98,7 @@ export default class TodoKnexRepository extends TodoRepository {
         .where(column, value)
         .whereNull('deleted_at');
       if (result.length < 1) throw new NotFoundError('User data not found');
-
+      
       return new CreatedTodo(result[0]);
     } catch (error) {
       if (error instanceof NotFoundError === false) {
@@ -177,10 +177,9 @@ export default class TodoKnexRepository extends TodoRepository {
    */
   async restoreBy(column, value) {
     try {
-      const todoResult = await this._knex(TodoRepository.tableName).where(
-        column,
-        value
-      );
+      const todoResult = await this._knex(TodoRepository.tableName)
+        .where(column, value)
+        .whereNotNull('deleted_at');
       if (todoResult.length < 1) throw new NotFoundError('Todo data not found');
       const createdTodo = new CreatedTodo(todoResult[0], true);
       createdTodo.deleted_at = null;
@@ -209,10 +208,9 @@ export default class TodoKnexRepository extends TodoRepository {
    */
   async destroyBy(column, value) {
     try {
-      const createdTodo = await this._knex(TodoRepository.tableName).where(
-        column,
-        value
-      );
+      const createdTodo = await this._knex(TodoRepository.tableName)
+        .where(column, value)
+        .whereNull('deleted_at');
       if (createdTodo.length < 1)
         throw new NotFoundError('Todo data not found');
 
@@ -245,7 +243,7 @@ export default class TodoKnexRepository extends TodoRepository {
       if (createdTodo.length < 1)
         throw new NotFoundError('User data not found');
 
-      await this._knex(TodoRepository.tableName).where(column, value).del();
+      await this._knex(TodoRepository.tableName).where(column, value).delete();
     } catch (error) {
       if (error instanceof NotFoundError === false) {
         throw new DatabaseError(error.message, {

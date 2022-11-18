@@ -234,10 +234,9 @@ export default class UserKnexRepository extends UserRepository {
    */
   async restoreBy(column, value) {
     try {
-      const userResult = await this._knex(UserRepository.tableName).where(
-        column,
-        value
-      );
+      const userResult = await this._knex(UserRepository.tableName)
+        .where(column, value)
+        .whereNotNull('deleted_at');
       if (userResult.length < 1) throw new NotFoundError('User data not found');
       const registeredUser = new RegisteredUser(userResult[0], true);
       registeredUser.deleted_at = null;
@@ -265,10 +264,9 @@ export default class UserKnexRepository extends UserRepository {
    */
   async destroyBy(column, value) {
     try {
-      const registeredUser = await this._knex(UserRepository.tableName).where(
-        column,
-        value
-      );
+      const registeredUser = await this._knex(UserRepository.tableName)
+        .where(column, value)
+        .whereNull('deleted_at');
       if (registeredUser.length < 1)
         throw new NotFoundError('User data not found');
 
