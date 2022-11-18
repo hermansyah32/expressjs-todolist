@@ -11,7 +11,7 @@ import { BodyResponse } from "../../Commons/Response/BodyResponse";
 export function response (err, req, res, next) {
     if (err){
         let responseJson = new BodyResponse().setResponseError('unexpected error');
-        console.log(err);
+        
         if (process.env.NODE_ENV === 'development'){
             console.log(err);
         }
