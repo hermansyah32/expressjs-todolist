@@ -17,7 +17,7 @@ RUN yarn install
 COPY . /usr/app/todolist
 
 # Set folder owner to node
-RUN chown -R node /usr/src/app
+RUN chown -R node /usr/app/todolist
 USER node
 
 # Run the container

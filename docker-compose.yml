@@ -4,35 +4,56 @@ services:
   redis:
     image: redis:latest
     restart: always
+    env_file: ./.env.production
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
-      - "6379:6379"
+      - ${REDIS_PORT}:${REDIS_PORT}
     networks:
       - docker-service
 
   mariadb:
     image: mariadb:latest
     restart: always
-    container_name: docker-mariadb
+    env_file: ./.env.production
     ports:
-      - "3306:3306"
+      - $DATABASE_PORT:${DATABASE_PORT}
     environment:
-      - MYSQL_ROOT_PASSWORD: 's3cr3t4dmir3'
+      MARIADB_ROOT_PASSWORD: $DATABASE_PASS
     networks:
       - docker-service
     volumes:
       - maria-data:/data/db
-      
+
   todolist:
     image: todolist
     build:
       context: .
       dockerfile: ./Dockerfile
+    env_file: ./.env.production
     environment:
-      NODE_ENV: production
+      NODE_ENV: ${NODE_ENV}
+      APP_NAME: ${APP_NAME}
+      APP_PORT: ${APP_PORT}
+
+      SESSION_SECRET: ${SESSION_SECRET}
+      SESSION_PREFIX: ${SESSION_PREFIX}
+
+      ACCESS_TOKEN_KEY: ${ACCESS_TOKEN_KEY}
+      REFRESH_TOKEN_KEY: ${REFRESH_TOKEN_KEY}
+
+      DATABASE_TYPE: ${DATABASE_TYPE}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASS: ${DATABASE_PASS}
+
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASS: ${REDIS_PASS}
     ports:
-      - 3000:443
+      - $APP_PORT:80
     networks:
       - docker-service
     depends_on:

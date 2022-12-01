@@ -5,6 +5,7 @@ This application need Redis and MySQL/Mariadb.
 - `yarn test` Run jest test.
 - `yarn knex migrate:latest` Run knex migration.
 - `yarn knex seed:run` Run seeder.
+- `yarn knex:test` Run knex command with `.env.testing` file config.
 
 # Commit Rules
 

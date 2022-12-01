@@ -51,7 +51,7 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-11-16T10:08:40.131Z",
-    "modified": "2022-11-17T12:33:48.735Z",
+    "modified": "2022-11-26T01:46:21.215Z",
     "headers": [],
     "params": [],
     "auth": {
@@ -61,13 +61,13 @@
     "tests": [
       {
         "type": "set-env-var",
-        "custom": " ",
+        "custom": "delete",
         "action": "setto",
         "value": "{{access_token}}"
       },
       {
         "type": "set-env-var",
-        "custom": " ",
+        "custom": "delete",
         "action": "setto",
         "value": "{{refresh_token}}"
       }
